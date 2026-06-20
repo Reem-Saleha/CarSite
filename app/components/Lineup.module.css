@@ -1,0 +1,132 @@
+/* tall wrapper = scroll distance; ~320vh gives a comfortable pan length */
+.wrap {
+  position: relative;
+  z-index: 2;
+  height: 320vh;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+/* pinned viewport */
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.headingRow {
+  position: absolute;
+  top: clamp(80px, 12vh, 120px);
+  left: 0;
+  right: 0;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  z-index: 3;
+}
+.heading {
+  font-size: var(--section-title);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.track {
+  display: flex;
+  gap: clamp(20px, 3vw, 44px);
+  padding: 0 clamp(20px, 4vw, 48px);
+  will-change: transform;
+}
+
+.panel {
+  flex: 0 0 auto;
+  width: min(60vw, 760px);
+}
+.panelPhoto {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.img {
+  object-fit: cover;
+}
+.panelOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(10, 11, 13, 0.85) 0%, rgba(10, 11, 13, 0.1) 55%, transparent 100%);
+}
+.panelText {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: clamp(20px, 3vw, 40px);
+  max-width: 46ch;
+}
+.kicker {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  color: var(--accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+}
+.panelTitle {
+  margin-top: 10px;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.panelCopy {
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ---------- reduced-motion / fallback: simple vertical stack ---------- */
+.fallback {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  padding: var(--section-pad-y) var(--section-pad-x);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.stack {
+  margin-top: 40px;
+  display: grid;
+  gap: 40px;
+}
+.fallback .panel {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.fallback .panelPhoto {
+  aspect-ratio: 16 / 10;
+}
+.fallback .panelText {
+  position: static;
+  padding: 0;
+}
+
+@media (max-width: 760px) {
+  .panel { width: 86vw; }
+  .fallback .panel { grid-template-columns: 1fr; }
+  .hint { display: none; }
+}

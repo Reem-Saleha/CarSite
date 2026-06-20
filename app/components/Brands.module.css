@@ -1,0 +1,105 @@
+.section {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  overflow: hidden; /* clip scattered tiles when they fly out */
+}
+.inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+.title {
+  font-size: var(--section-title);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: clamp(32px, 6vh, 56px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 1.8vw, 24px);
+  perspective: 1000px;
+}
+
+/* glossy black tile */
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: clamp(26px, 3.4vw, 40px) 16px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: #f2f4f8;
+  will-change: transform;
+  transform-style: preserve-3d;
+
+  /* the black gloss: top sheen fading into deep black */
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.02) 22%, rgba(0, 0, 0, 0) 45%),
+    linear-gradient(180deg, #1c1f24 0%, #0c0d10 55%, #060708 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),   /* crisp top edge highlight */
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),          /* bottom inner shadow */
+    0 18px 40px rgba(0, 0, 0, 0.5),             /* drop shadow */
+    0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+/* moving sheen sweep on hover */
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.16) 48%, transparent 62%);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
+}
+.tile:hover {
+  border-color: rgba(255, 90, 31, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 26px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 90, 31, 0.15);
+}
+.tile:hover::before {
+  opacity: 1;
+}
+
+.logoWrap {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.logoWrap img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 760px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 460px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}

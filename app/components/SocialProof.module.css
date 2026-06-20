@@ -1,0 +1,86 @@
+.section {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+.inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+.kicker {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: clamp(24px, 4vh, 40px);
+}
+
+/* logo wall = logos only */
+.logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(28px, 5vw, 64px);
+  padding-bottom: clamp(48px, 8vh, 88px);
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  display: inline-flex;
+  opacity: 0.75;
+  transition: opacity 0.25s var(--ease);
+}
+.logo:hover {
+  opacity: 1;
+}
+.logo img {
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* testimonials */
+.quotes {
+  margin-top: clamp(48px, 8vh, 88px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+}
+.quote {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.quoteBody {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+.quoteBody::before {
+  content: "\201C";
+  color: var(--accent);
+  font-size: 2.4em;
+  line-height: 0;
+  vertical-align: -0.35em;
+  margin-right: 4px;
+}
+.cite {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.citeName {
+  font-weight: 700;
+}
+.citeRole {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .quotes { grid-template-columns: 1fr; max-width: 60ch; margin-left: auto; margin-right: auto; }
+}

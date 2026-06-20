@@ -1,0 +1,75 @@
+.hero {
+  position: relative;
+  z-index: 2; /* above the shared video layer */
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none; /* the clean video shows through; CTA opts back in */
+}
+
+/* thin gradient only at the bottom edge, under the text */
+.footFade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 42%;
+  background: linear-gradient(0deg, rgba(10, 11, 13, 0.85) 0%, rgba(10, 11, 13, 0) 100%);
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px) clamp(48px, 8vh, 88px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.headline {
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.45);
+  padding-bottom: 0.08em; /* italic descender clearance */
+}
+.word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+.accentWord em {
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.ctaWrap {
+  margin-top: 30px;
+  pointer-events: auto;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 15px 28px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #1a0f08;
+  white-space: nowrap;
+  transition: background 0.25s var(--ease);
+  will-change: transform;
+}
+.cta:hover { background: var(--accent-strong); }
+.cta svg { width: 18px; height: 18px; }
+
+@media (max-width: 768px) {
+  .headline { font-size: clamp(2.8rem, 14vw, 4.2rem); }
+}
